@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=2]
+[gd_scene load_steps=12 format=2]
 
 [ext_resource path="res://assets/background.png" type="Texture" id=1]
 [ext_resource path="res://assets/body.png" type="Texture" id=2]
@@ -8,6 +8,9 @@
 [ext_resource path="res://assets/Score.png" type="Texture" id=6]
 [ext_resource path="res://Points_Panel.gd" type="Script" id=7]
 [ext_resource path="res://assets/next.png" type="Texture" id=8]
+[ext_resource path="res://assets/log-out.png" type="Texture" id=9]
+[ext_resource path="res://assets/Sound Effect Tet-Ritch/sound_full.wav" type="AudioStream" id=10]
+[ext_resource path="res://assets/Sound Effect Tet-Ritch/line.wav" type="AudioStream" id=11]
 
 [node name="Main" type="Node2D"]
 script = ExtResource( 3 )
@@ -44,9 +47,33 @@ scale = Vector2( 1.5, 1.5 )
 autostart = true
 
 [node name="soundrotate" type="AudioStreamPlayer2D" parent="."]
-volume_db = 13.805
+volume_db = 9.435
 
 [node name="gameoversound" type="AudioStreamPlayer2D" parent="."]
 volume_db = 13.983
 
+[node name="MarginContainer" type="MarginContainer" parent="."]
+margin_left = 30.0
+margin_top = 1690.0
+margin_right = 62.0
+margin_bottom = 1716.0
+rect_scale = Vector2( 6, 6 )
+
+[node name="Button" type="Button" parent="MarginContainer"]
+margin_right = 32.0
+margin_bottom = 26.0
+icon = ExtResource( 9 )
+flat = true
+
+[node name="backsound" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource( 10 )
+volume_db = 10.124
+pitch_scale = 1.04
+autoplay = true
+
+[node name="soundleftraight" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource( 11 )
+volume_db = 10.124
+
 [connection signal="timeout" from="Timer" to="." method="_on_Timer_timeout"]
+[connection signal="pressed" from="MarginContainer/Button" to="." method="_on_Button_pressed"]

@@ -17,9 +17,13 @@ var next_num:int=0
 func _ready():
 	shapes=[shape1,shape2,shape3,shape4,shape5,shape6,shape7]
 	rnd.randomize()
-
+	var audiostream = ResourceLoader.load("res://assets/Sound Effect Tet-Ritch/sound_full.wav")
+	$backsound.stream = audiostream
+	$backsound.play()
+	
 func _on_Timer_timeout():
 	$Timer.wait_time=Globals.speed
+		
 	if not active_block:
 		num=rnd.randi()%3 if num==-1 else next_num
 		next_num=rnd.randi()%3
@@ -48,12 +52,25 @@ func _input(event):
 	if sh:
 		if Input.is_action_just_pressed("ui_right"):
 			move_right()
+			var audiostream = ResourceLoader.load("res://assets/Sound Effect Tet-Ritch/line.wav")
+			$soundleftraight.stream = audiostream
+			$soundleftraight.play()
 		if Input.is_action_just_pressed("ui_left"):
 			move_left()
+			var audiostream = ResourceLoader.load("res://assets/Sound Effect Tet-Ritch/line.wav")
+			$soundleftraight.stream = audiostream
+			$soundleftraight.play()
 		if Input.is_action_just_pressed("ui_down"):
 			move_down()
+			var audiostream = ResourceLoader.load("res://assets/Sound Effect Tet-Ritch/line.wav")
+			$soundleftraight.stream = audiostream
+			$soundleftraight.play()
 		if Input.is_action_just_pressed("ui_up"):
 			var audiostream = ResourceLoader.load("res://assets/Sound Effect Tet-Ritch/selection.wav")
 			$soundrotate.stream = audiostream
 			$soundrotate.play()
 			sh.rotate_it()
+
+
+func _on_Button_pressed():
+	get_tree().quit()
